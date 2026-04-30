@@ -18,31 +18,32 @@ Microservicio REST para la gestión de ingresos financieros, desarrollado con Sp
 ## Arquitectura Hexagonal
 
 El proyecto sigue la arquitectura hexagonal (ports & adapters), organizada en tres capas:
-com.udea.incomeservice/
-│
-├── application/                        → Capa de aplicación
-│   └── config/                         → Configuración de beans
-│
-├── domain/                             → Capa de dominio (lógica de negocio)
-│   ├── model/                          → Entidades de dominio
-│   ├── usecase/                        → Casos de uso
-│   ├── gateway/                        → Puertos de salida (interfaces)
-│   └── exception/                      → Excepciones de dominio
-│
-└── infrastructure/                     → Capa de infraestructura
-├── driven/                         → Adaptadores de salida
-│   └── persistence/
-│       ├── entity/                 → Entidades JPA
-│       ├── repository/             → Repositorios Spring Data
-│       ├── mapper/                 → Mappers Entity ↔ Model
-│       └── adapter/                → Implementación de gateways
-│
-└── entrypoint/                     → Adaptadores de entrada
-└── rest/
-├── controller/             → REST Controllers
-├── dto/                    → Request/Response DTOs
-├── mapper/                 → Mappers DTO ↔ Model
-└── handler/               → Manejo global de excepciones
+    com.udea.incomeservice/
+    │
+    ├── application/                    → Capa de aplicación
+    │   └── config/                     → Configuración de beans
+    │
+    ├── domain/                         → Capa de dominio (lógica de negocio)
+    │   ├── model/                      → Entidades de dominio
+    │   ├── usecase/                    → Casos de uso
+    │   ├── gateway/                    → Puertos de salida (interfaces)
+    │   └── exception/                  → Excepciones de dominio
+    │
+    └── infrastructure/                 → Capa de infraestructura
+        ├── driven/                     → Adaptadores de salida
+        │   └── persistence/
+        │       ├── entity/             → Entidades JPA
+        │       ├── repository/         → Repositorios Spring Data
+        │       ├── mapper/             → Mappers Entity ↔ Model
+        │       └── adapter/            → Implementación de gateways
+        │
+        └── entrypoint/                 → Adaptadores de entrada
+            └── rest/
+                ├── controller/         → REST Controllers
+                ├── dto/                → Request/Response DTOs
+                ├── mapper/             → Mappers DTO ↔ Model
+                └── handler/           → Manejo global de excepciones
+
 
 ## API Endpoints
 
