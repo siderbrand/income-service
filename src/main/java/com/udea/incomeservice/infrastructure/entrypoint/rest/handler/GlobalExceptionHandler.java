@@ -1,5 +1,6 @@
 package com.udea.incomeservice.infrastructure.entrypoint.rest.handler;
 
+import com.udea.incomeservice.domain.exception.InvalidExpenseException;
 import com.udea.incomeservice.domain.exception.InvalidIncomeException;
 import com.udea.incomeservice.infrastructure.entrypoint.rest.EntryPointConstants;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidIncomeException.class)
     public ResponseEntity<Map<String, Object>> handleInvalidIncome(InvalidIncomeException ex) {
+        return buildError(HttpStatus.BAD_REQUEST, ex.getMessage());
+    }
+
+    @ExceptionHandler(InvalidExpenseException.class)
+    public ResponseEntity<Map<String, Object>> handleInvalidExpense(InvalidExpenseException ex) {
         return buildError(HttpStatus.BAD_REQUEST, ex.getMessage());
     }
 

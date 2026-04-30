@@ -3,30 +3,16 @@ package com.udea.incomeservice.infrastructure.entrypoint.rest.mapper;
 import com.udea.incomeservice.domain.model.Income;
 import com.udea.incomeservice.infrastructure.entrypoint.rest.dto.IncomeRequestDTO;
 import com.udea.incomeservice.infrastructure.entrypoint.rest.dto.IncomeResponseDTO;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
-@Component
-public class IncomeRestMapper {
+@Mapper(componentModel = "spring")
+public interface IncomeRestMapper {
 
-    public Income toDomain(IncomeRequestDTO dto, Long userId) {
-        return Income.builder()
-                .userId(userId)
-                .amount(dto.getAmount())
-                .description(dto.getDescription())
-                .date(dto.getDate())
-                .category(dto.getCategory())
-                .build();
-    }
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "userId", source = "userId")
+    Income toDomain(IncomeRequestDTO dto, Long userId);
 
-    public IncomeResponseDTO toResponse(Income income) {
-        return IncomeResponseDTO.builder()
-                .id(income.getId())
-                .userId(income.getUserId())
-                .amount(income.getAmount())
-                .description(income.getDescription())
-                .date(income.getDate())
-                .category(income.getCategory())
-                .createdAt(income.getCreatedAt())
-                .build();
-    }
+    IncomeResponseDTO toResponse(Income income);
 }

@@ -2,32 +2,12 @@ package com.udea.incomeservice.infrastructure.driven.persistence.mapper;
 
 import com.udea.incomeservice.domain.model.Income;
 import com.udea.incomeservice.infrastructure.driven.persistence.entity.IncomeEntity;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
-@Component
-public class IncomeEntityMapper {
+@Mapper(componentModel = "spring")
+public interface IncomeEntityMapper {
 
-    public IncomeEntity toEntity(Income income) {
-        return IncomeEntity.builder()
-                .id(income.getId())
-                .userId(income.getUserId())
-                .amount(income.getAmount())
-                .description(income.getDescription())
-                .date(income.getDate())
-                .category(income.getCategory())
-                .createdAt(income.getCreatedAt())
-                .build();
-    }
+    IncomeEntity toEntity(Income income);
 
-    public Income toDomain(IncomeEntity entity) {
-        return Income.builder()
-                .id(entity.getId())
-                .userId(entity.getUserId())
-                .amount(entity.getAmount())
-                .description(entity.getDescription())
-                .date(entity.getDate())
-                .category(entity.getCategory())
-                .createdAt(entity.getCreatedAt())
-                .build();
-    }
+    Income toDomain(IncomeEntity entity);
 }
