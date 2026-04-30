@@ -98,7 +98,7 @@ CREATE TABLE incomes (
 # Configurar variables de entorno
 export DB_URL=jdbc:postgresql://localhost:5432/income_db
 export DB_USER=postgres
-export DB_PASSWORD=postgres
+export DB_PASSWORD= xxxxx
 
 # Ejecutar
 ./mvnw spring-boot:run
