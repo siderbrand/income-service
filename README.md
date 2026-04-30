@@ -1,30 +1,6 @@
 # Income Service 💰
 
-Microservicio REST para la gestión de ingresos financieros, desarrollado con Spring Boot siguiendo arquitectura hexagonal (scaffold Bancolombia).
-
-## Historia de Usuario
-
-**HU-03:** Como usuario autenticado de la aplicación, quiero registrar mis ingresos indicando monto, descripción, fecha y categoría para llevar un control preciso de las fuentes de dinero que recibo mensualmente.
-
-### Criterios de Aceptación
-
-#### ✅ CA1 — Registro de ingreso con datos completos
-- **Dado** que soy un usuario autenticado en el módulo de ingresos
-- **Cuando** ingreso monto, descripción, fecha y selecciono una categoría de ingreso
-- **Entonces** el sistema guarda el registro y lo muestra en el listado de ingresos del mes
-- **Y** actualiza automáticamente el balance financiero del período
-
-#### ✅ CA2 — Registro de ingreso con monto inválido
-- **Dado** que estoy en el formulario de registro de ingresos
-- **Cuando** ingreso un monto igual a cero o negativo
-- **Entonces** el sistema muestra: *"El monto debe ser mayor a cero"*
-- **Y** no permite guardar el registro hasta que el monto sea válido
-
-#### ✅ CA3 — Registro de ingreso sin categoría seleccionada
-- **Dado** que estoy completando el formulario de ingreso
-- **Cuando** dejo el campo de categoría vacío e intento guardar
-- **Entonces** el sistema muestra: *"Debes seleccionar una categoría"*
-- **Y** resalta el campo requerido hasta que sea completado
+Microservicio REST para la gestión de ingresos financieros, desarrollado con Spring Boot siguiendo arquitectura hexagonal.
 
 ## Tech Stack
 
