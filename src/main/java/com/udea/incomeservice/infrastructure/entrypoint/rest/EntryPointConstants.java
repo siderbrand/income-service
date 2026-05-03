@@ -26,4 +26,5 @@ public final class EntryPointConstants {
     public static final String CATEGORY_TYPE_REQUIRED = "El tipo es requerido (INCOME o EXPENSE)";
 
     public static final String BUDGET_BASE_PATH = "/api/budgets";
+    public static final String BALANCE_BASE_PATH = "/api/balance";
 }

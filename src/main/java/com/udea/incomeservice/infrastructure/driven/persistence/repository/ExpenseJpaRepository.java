@@ -19,4 +19,8 @@ public interface ExpenseJpaRepository extends JpaRepository<ExpenseEntity, Long>
             "AND e.date BETWEEN :startDate AND :endDate")
     BigDecimal sumAmountByUserIdAndCategoryIdAndDateBetween(
             Long userId, Long categoryId, LocalDate startDate, LocalDate endDate);
+
+    @Query("SELECT COALESCE(SUM(e.amount), 0) FROM ExpenseEntity e " +
+            "WHERE e.userId = :userId AND e.date BETWEEN :startDate AND :endDate")
+    BigDecimal sumAmountByUserIdAndDateBetween(Long userId, LocalDate startDate, LocalDate endDate);
 }

@@ -55,4 +55,11 @@ public class ExpenseAdapter implements ExpenseGateway {
         return repository.sumAmountByUserIdAndCategoryIdAndDateBetween(
                 userId, categoryId, yearMonth.atDay(1), yearMonth.atEndOfMonth());
     }
+
+    @Override
+    public BigDecimal sumByUserIdAndMonth(Long userId, int year, int month) {
+        YearMonth yearMonth = YearMonth.of(year, month);
+        return repository.sumAmountByUserIdAndDateBetween(
+                userId, yearMonth.atDay(1), yearMonth.atEndOfMonth());
+    }
 }

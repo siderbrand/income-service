@@ -16,4 +16,5 @@ public final class DomainConstants {
     public static final String BUDGET_ALREADY_EXISTS = "Ya existe un presupuesto para esta categoría";
     public static final String BUDGET_WARNING = "Estás cerca del límite en la categoría %s";
     public static final String BUDGET_EXCEEDED = "Presupuesto agotado";
+    public static final String BALANCE_NEGATIVE_ALERT = "Tus gastos superan tus ingresos este mes";
 }

@@ -10,4 +10,5 @@ public interface ExpenseGateway {
     List<Expense> findByUserId(Long userId);
     List<Expense> findByUserIdAndMonth(Long userId, int year, int month);
     BigDecimal sumByUserIdAndCategoryIdAndMonth(Long userId, Long categoryId, int year, int month);
+    BigDecimal sumByUserIdAndMonth(Long userId, int year, int month);
 }

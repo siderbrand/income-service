@@ -4,6 +4,7 @@ import com.udea.incomeservice.domain.gateway.BudgetGateway;
 import com.udea.incomeservice.domain.gateway.CategoryGateway;
 import com.udea.incomeservice.domain.gateway.ExpenseGateway;
 import com.udea.incomeservice.domain.gateway.IncomeGateway;
+import com.udea.incomeservice.domain.usecase.BalanceUseCase;
 import com.udea.incomeservice.domain.usecase.BudgetUseCase;
 import com.udea.incomeservice.domain.usecase.CategoryUseCase;
 import com.udea.incomeservice.domain.usecase.ExpenseUseCase;
@@ -32,5 +33,10 @@ public class IncomeBeanConfig {
     @Bean
     public BudgetUseCase budgetUseCase(BudgetGateway budgetGateway, ExpenseGateway expenseGateway, CategoryGateway categoryGateway) {
         return new BudgetUseCase(budgetGateway, expenseGateway, categoryGateway);
+    }
+
+    @Bean
+    public BalanceUseCase balanceUseCase(IncomeGateway incomeGateway, ExpenseGateway expenseGateway) {
+        return new BalanceUseCase(incomeGateway, expenseGateway);
     }
 }
