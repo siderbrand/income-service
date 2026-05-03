@@ -11,10 +11,9 @@ import java.time.LocalDateTime;
 @Builder
 public class ExpenseResponseDTO {
     private Long id;
-    private Long userId;
     private BigDecimal amount;
     private String description;
     private LocalDate date;
-    private String category;
+    private String categoryName;
     private LocalDateTime createdAt;
 }

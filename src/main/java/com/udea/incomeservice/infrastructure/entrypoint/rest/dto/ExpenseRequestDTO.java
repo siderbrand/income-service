@@ -23,6 +23,6 @@ public class ExpenseRequestDTO {
     @NotNull(message = EntryPointConstants.DATE_REQUIRED)
     private LocalDate date;
 
-    @NotBlank(message = EntryPointConstants.CATEGORY_REQUIRED)
-    private String category;
+    @NotNull(message = EntryPointConstants.CATEGORY_REQUIRED)
+    private Long categoryId;
 }

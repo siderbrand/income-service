@@ -11,8 +11,10 @@ public interface ExpenseRestMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "categoryName", ignore = true)
     @Mapping(target = "userId", source = "userId")
     Expense toDomain(ExpenseRequestDTO dto, Long userId);
 
+    @Mapping(target = "categoryName", source = "categoryName")
     ExpenseResponseDTO toResponse(Expense expense);
 }

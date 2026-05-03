@@ -9,4 +9,8 @@ public final class DomainConstants {
     public static final String DATE_REQUIRED = "La fecha es requerida";
     public static final String DESCRIPTION_REQUIRED = "La descripción es requerida";
     public static final String DATE_CANNOT_BE_FUTURE = "La fecha no puede ser futura";
+    public static final String DUPLICATE_CATEGORY = "Ya existe una categoría con ese nombre";
+    public static final String CATEGORY_NAME_REQUIRED = "El nombre de la categoría es requerido";
+    public static final String CATEGORY_TYPE_INVALID = "El tipo debe ser INCOME o EXPENSE";
+    public static final String CATEGORY_NOT_FOUND = "La categoría seleccionada no existe";
 }

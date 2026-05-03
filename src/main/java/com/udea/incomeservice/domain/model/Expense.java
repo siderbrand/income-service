@@ -21,6 +21,7 @@ public class Expense {
     private BigDecimal amount;
     private String description;
     private LocalDate date;
-    private String category;
+    private Long categoryId;
+    private String categoryName;
     private LocalDateTime createdAt;
 }
