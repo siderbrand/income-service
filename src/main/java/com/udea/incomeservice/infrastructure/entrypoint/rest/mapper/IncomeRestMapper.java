@@ -11,8 +11,10 @@ public interface IncomeRestMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "categoryName", ignore = true)
     @Mapping(target = "userId", source = "userId")
     Income toDomain(IncomeRequestDTO dto, Long userId);
 
+    @Mapping(target = "categoryName", source = "categoryName")
     IncomeResponseDTO toResponse(Income income);
 }

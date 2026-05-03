@@ -20,4 +20,8 @@ public final class EntryPointConstants {
     public static final String DATE_CANNOT_BE_FUTURE = "La fecha no puede ser futura";
     public static final String VALIDATION_ERROR = "Error de validación";
     public static final String INTERNAL_SERVER_ERROR = "Error interno del servidor";
+
+    public static final String CATEGORY_BASE_PATH = "/api/categories";
+    public static final String CATEGORY_NAME_REQUIRED = "El nombre de la categoría es requerido";
+    public static final String CATEGORY_TYPE_REQUIRED = "El tipo es requerido (INCOME o EXPENSE)";
 }

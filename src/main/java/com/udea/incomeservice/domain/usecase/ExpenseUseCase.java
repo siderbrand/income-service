@@ -2,6 +2,7 @@ package com.udea.incomeservice.domain.usecase;
 
 import com.udea.incomeservice.domain.exception.DomainConstants;
 import com.udea.incomeservice.domain.exception.InvalidExpenseException;
+import com.udea.incomeservice.domain.gateway.CategoryGateway;
 import com.udea.incomeservice.domain.gateway.ExpenseGateway;
 import com.udea.incomeservice.domain.model.Expense;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 public class ExpenseUseCase {
 
     private final ExpenseGateway expenseGateway;
+    private final CategoryGateway categoryGateway;
 
     public Expense registerExpense(Expense expense) {
         validateExpense(expense);
@@ -29,20 +31,14 @@ public class ExpenseUseCase {
     }
 
     private void validateExpense(Expense expense) {
-        if (expense.getAmount() == null || expense.getAmount().compareTo(BigDecimal.ZERO) <= 0) {
+        if (expense.getAmount().compareTo(BigDecimal.ZERO) <= 0) {
             throw new InvalidExpenseException(DomainConstants.AMOUNT_MUST_BE_POSITIVE);
-        }
-        if (expense.getCategory() == null || expense.getCategory().isBlank()) {
-            throw new InvalidExpenseException(DomainConstants.CATEGORY_REQUIRED);
-        }
-        if (expense.getDate() == null) {
-            throw new InvalidExpenseException(DomainConstants.DATE_REQUIRED);
         }
         if (expense.getDate().isAfter(LocalDate.now())) {
             throw new InvalidExpenseException(DomainConstants.DATE_CANNOT_BE_FUTURE);
         }
-        if (expense.getDescription() == null || expense.getDescription().isBlank()) {
-            throw new InvalidExpenseException(DomainConstants.DESCRIPTION_REQUIRED);
+        if (!categoryGateway.existsById(expense.getCategoryId())) {
+            throw new InvalidExpenseException(DomainConstants.CATEGORY_NOT_FOUND);
         }
     }
 }
