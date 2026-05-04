@@ -21,7 +21,9 @@ jobs:
           cache: maven
 
       - name: Build and test
-        run: ./mvnw clean verify -Dspring.profiles.active=test
+        run: |
+          chmod +x mvnw
+          ./mvnw clean verify -Dspring.profiles.active=test
 
       - name: Upload test results
         if: always()
