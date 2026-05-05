@@ -19,7 +19,7 @@ public class CategoryUseCase {
 
     public Category createCategory(Category category) {
         category.setType(category.getType().toUpperCase());
-        category.setName(category.getName().trim());
+        category.setName(category.getName().trim().toUpperCase());
 
         if (!VALID_TYPES.contains(category.getType())) {
             throw new InvalidIncomeException(DomainConstants.CATEGORY_TYPE_INVALID);
