@@ -34,6 +34,17 @@
         <sonar.coverage.jacoco.xmlReportPaths>
             ${project.build.directory}/site/jacoco/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>
+
+        <sonar.exclusions>
+            **/*MapperImpl.java,
+            **/config/**,
+            **/*Application.java
+        </sonar.exclusions>
+        <sonar.coverage.exclusions>
+            **/*MapperImpl.java,
+            **/config/**,
+            **/*Application.java
+        </sonar.coverage.exclusions>
     </properties>
 
     <dependencies>
@@ -192,6 +203,9 @@
                             <formats>
                                 <format>XML</format>
                             </formats>
+                            <excludes>
+                                <exclude>**/*MapperImpl.class</exclude>
+                            </excludes>
                         </configuration>
                     </execution>
                 </executions>
