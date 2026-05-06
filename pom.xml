@@ -6,9 +6,8 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <!-- Actualizado a la versión estable más reciente para corregir vulnerabilidades base -->
         <version>3.4.5</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <groupId>com.udea</groupId>
@@ -22,8 +21,8 @@
         <mapstruct.version>1.6.3</mapstruct.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 
-        <!-- Forzamos versiones específicas para mitigar los reportes de Trivy -->
-        <spring-security.version>6.4.6</spring-security.version>
+        <!-- AJUSTE CRÍTICO: Subimos a 6.5.9 para corregir el CVE-2026-22732 -->
+        <spring-security.version>6.5.9</spring-security.version>
         <tomcat.version>10.1.53</tomcat.version>
     </properties>
 
@@ -58,7 +57,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Utilidades: Lombok y MapStruct -->
+        <!-- Utilidades -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -131,13 +130,10 @@
                     </excludes>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
@@ -157,7 +153,6 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
