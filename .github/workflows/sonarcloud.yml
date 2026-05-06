@@ -35,7 +35,23 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar -Dsonar.projectKey=fabrica-escuela_income-service
+        run: |
+          echo "Event: $GITHUB_EVENT_NAME"
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "Running PR analysis"
+            ./mvnw -B org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar \
+              -Dsonar.projectKey=fabrica-escuela_income-service \
+              -Dsonar.organization=fabrica-escuela \
+              -Dsonar.pullrequest.key=${{ github.event.number }} \
+              -Dsonar.pullrequest.branch=${{ github.head_ref }} \
+              -Dsonar.pullrequest.base=${{ github.base_ref }}
+          else
+            echo "Running branch analysis for ${{ github.ref_name }}"
+            ./mvnw -B org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar \
+              -Dsonar.projectKey=fabrica-escuela_income-service \
+              -Dsonar.organization=fabrica-escuela \
+              -Dsonar.branch.name=${{ github.ref_name }}
+          fi
 
       - name: Upload test results
         if: failure()
