@@ -24,6 +24,11 @@
         <!-- AJUSTE CRÍTICO: Subimos a 6.5.9 para corregir el CVE-2026-22732 -->
         <spring-security.version>6.5.9</spring-security.version>
         <tomcat.version>10.1.53</tomcat.version>
+        <maven.compiler.release>21</maven.compiler.release>
+        <sonar.projectKey>fabrica-escuela_income-service</sonar.projectKey>
+        <sonar.organization>fabrica-escuela</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar-maven-plugin.version>4.0.0.4121</sonar-maven-plugin.version>
     </properties>
 
     <dependencies>
@@ -159,6 +164,28 @@
                 <configuration>
                     <argLine>-XX:+EnableDynamicAgentLoading</argLine>
                 </configuration>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.10</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${sonar-maven-plugin.version}</version>
             </plugin>
         </plugins>
     </build>
