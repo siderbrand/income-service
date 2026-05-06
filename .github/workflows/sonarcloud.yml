@@ -7,8 +7,10 @@ on:
     branches: [ main, develop ]
 
 jobs:
-  build:
+  sonar:
     runs-on: ubuntu-latest
+    # Only run Sonar on push events (trusted) or PRs from the same repo
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name == github.repository
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,20 +28,14 @@ jobs:
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
 
-      - uses: actions/cache@v4
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
       - name: Make Maven wrapper executable
         run: chmod +x mvnw
 
-      - name: Build and analyze
+      - name: Build and analyze (with SonarCloud)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./mvnw -B verify sonar:sonar -Dsonar.projectKey=fabrica-escuela -Dsonar.organization=fabrica-escuela
+        run: ./mvnw -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar
 
       - name: Upload test results
         if: failure()
