@@ -21,29 +21,32 @@
         <mapstruct.version>1.6.3</mapstruct.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 
-        <!-- AJUSTE CRÍTICO: Subimos a 6.5.9 para corregir el CVE-2026-22732 -->
         <spring-security.version>6.5.9</spring-security.version>
         <tomcat.version>10.1.53</tomcat.version>
         <maven.compiler.release>21</maven.compiler.release>
+
+        <!-- SonarCloud -->
         <sonar.projectKey>fabrica-escuela_income-service</sonar.projectKey>
         <sonar.organization>fabrica-escuela</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar-maven-plugin.version>4.0.0.4121</sonar-maven-plugin.version>
+        <sonar.sources>src/main/java</sonar.sources>
+        <sonar.tests>src/test/java</sonar.tests>
+        <sonar.java.binaries>target/classes</sonar.java.binaries>
+        <sonar.java.test.binaries>target/test-classes</sonar.java.test.binaries>
 
-        <!-- ✅ Ruta del reporte XML de JaCoCo para SonarCloud -->
         <sonar.coverage.jacoco.xmlReportPaths>
             ${project.build.directory}/site/jacoco/jacoco.xml
         </sonar.coverage.jacoco.xmlReportPaths>
 
         <sonar.exclusions>
             **/*MapperImpl.java,
-            **/config/**,
             **/*Application.java
         </sonar.exclusions>
         <sonar.coverage.exclusions>
             **/*MapperImpl.java,
-            **/config/**,
-            **/*Application.java
+            **/*Application.java,
+            **/config/**
         </sonar.coverage.exclusions>
     </properties>
 
@@ -189,9 +192,6 @@
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
-                        <configuration>
-                            <propertyName>surefireArgLine</propertyName>
-                        </configuration>
                     </execution>
                     <execution>
                         <id>report</id>
@@ -202,9 +202,11 @@
                         <configuration>
                             <formats>
                                 <format>XML</format>
+                                <format>HTML</format>
                             </formats>
                             <excludes>
                                 <exclude>**/*MapperImpl.class</exclude>
+                                <exclude>**/*Application.class</exclude>
                             </excludes>
                         </configuration>
                     </execution>
@@ -216,7 +218,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
-                    <argLine>${surefireArgLine} -XX:+EnableDynamicAgentLoading</argLine>
+                    <argLine>@{argLine} -XX:+EnableDynamicAgentLoading</argLine>
                 </configuration>
             </plugin>
 
